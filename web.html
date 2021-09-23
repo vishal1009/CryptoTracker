@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Tracker</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+
+        <h1 class="col-md-7 text-center mt-2"style="color:white;"><b>Crypto Tracker</b></h1>
+         <h3 class="col-md-7 text-center mt-2"style="color:rgb(7, 49, 177);"><b>By Vishal Dhongade</b></h3>
+      <div class="col-md-7 row justify-content-center main fix">
+        <div class="col-10">
+            <form action="" id="searchForm"  >
+                <div class="form-row">
+                   <div class="col-12 form-group">
+                   <label for="ctype"><b>Select Currency:</b></label>
+                   <br>
+                   <select name="coinType" class="form-control"id="ctype">
+                    <option value="btc-usd" style="color:red">Bitcoin-$US Dollar </option>
+                    <option value="doge-usd" style="color:blue">Dogecoin-$US Dollar </option>
+                    <option value="eth-usd"style="color:orange">Etherum-$US Dollar</option>
+                    <option value="btc-doge" style="color:green">Bitcoin-Dogecoin</option>
+                    <option value="bnb-usd"style="color:grey">Binance-$US Dollar</option>
+        
+                    </select>
+
+                   </div>
+                </div>
+                <br>
+                <button type="submit" class="col-12 btn btn-primary">Get Price</button>
+            </form>
+      </div>
+    </div>
+    <div class="col-md-8 text-center row justify-content-center">
+        <table class=" table col-md-7 p-1 m-2 " border="1px" id="resTable">   
+        </table>
+        
+    </div>   
+</div>
+
+
+</div>
+<footer class="py-4 bg-dark flex-shrink-0">
+    <div class="container text-center">
+      <a href="https://bootstrapious.com/snippets" class="text-muted">Made with <svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="height: 0.8rem;"><path d="M896 1664q-26 0-44-18l-624-602q-10-8-27.5-26T145 952.5 77 855 23.5 734 0 596q0-220 127-344t351-124q62 0 126.5 21.5t120 58T820 276t76 68q36-36 76-68t95.5-68.5 120-58T1314 128q224 0 351 124t127 344q0 221-229 450l-623 600q-18 18-44 18z" fill="#e25555"></path></svg> by Vishal
+        Dhongade
+      </a>
+    </div>
+  </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script src="app.js"></script>
+
+    
+</body>
+</html>
