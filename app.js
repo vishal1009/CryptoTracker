@@ -1,75 +1,50 @@
 const form = document.querySelector('#searchForm');
 const res = document.querySelector('#resTable');
-var upd;
-
+const cont = document.getElementById("allContaint");
 
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
-    if(upd){
-        clearTimeout(upd);
-    }
-    const ctype=form.elements.coinType.value;
-    console.log(ctype);
+    const ctype = form.elements.coinType.value;
+    cont.classList.add('mainClick');
+    cont.classList.remove('main');    
     fetchPrice(ctype);
-    
-
 
 });
 
-function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
-  };
+const fetchPrice = async(ctype) =>{
+    const r = await axios.get(`https://api.coinstats.app/public/v1/coins/${ctype}?currency=USD`);
+    showPrice(r.data.coin);
+}
 
-const fetchPrice= async(ctype)=>{
-    const r= await axios.get(`https://api.coinstats.app/public/v1/coins/${ctype}?currency=USD`);
-    const price=r.data.ticker.price;
-    const volume=r.data.ticker.volume;
-    const change=r.data.ticker.change;
-    const base=r.data.ticker.base;
-    const target=r.data.ticker.target;
-    const time = timeConverter(r.data.timestamp);
+
+const showPrice = (coinData)=>{
+    const price = coinData.price;
+    const vol = coinData.volume;
+    const change = coinData.priceChange1d;
+    const coin = coinData.name;
+    const curr = 'USD';
     var col= "green";
     if(change<0){
         col = "red";
     }
-    res.innerHTML=`
-<thead class="thead-dark">
+    res.innerHTML = `<tr class="bg-primary" style="color: white;">
+    <td>
+        Property
+    </td>
+    <td>
+        Value
+    </td>
+</tr>
 <tr>
-<th scope="col">Propery</th>
-<th scope="col">Value</th>
+    <td>${coin}</td>
+    <td style="color:${col};"><span style="font-size: 1.3em;">${price}</span> ${curr}</td>
 </tr>
-</thead>
-<tbody>
-<tr class="table-light">
-    <td>${base}</td>
-    <td style="color:${col};"id="test">${price} ${target}</td>
+<tr>
+    <td>Volume (24hrs)</td>
+    <td>${vol}</td>
 </tr>
-<tr class="table-light">
-    <td>Volume</td>
-    <td>${volume}</td>
-</tr>
-<tr class="table-light">
-    <td>Change</td>
-    <td style="color:${col};">${change}</td>
-</tr>
-<tr class="table-light">
-    <td>Last Update</td>
-    <td>${time}</td>
-</tr>
-<tbody>
-`
-upd=setTimeout(()=>fetchPrice(ctype),1000);
-    
-
-}
-
- 
+<tr>
+    <td>Change (24hrs)</td>
+    <td style="color:${col};">${change} ${curr}</td>
+</tr>`;
+};
