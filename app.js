@@ -30,7 +30,7 @@ function timeConverter(UNIX_timestamp){
   };
 
 const fetchPrice= async(ctype)=>{
-    const r= await axios.get(`https://api.cryptonator.com/api/ticker/${ctype}`);
+    const r= await axios.get(`https://api.coinstats.app/public/v1/coins/${ctype}?currency=USD`);
     const price=r.data.ticker.price;
     const volume=r.data.ticker.volume;
     const change=r.data.ticker.change;
